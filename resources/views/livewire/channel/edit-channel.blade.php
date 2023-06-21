@@ -3,7 +3,7 @@
 
 
     @if ($channel->image)
-        <img src="{{asset('images' . '/$channel->image' )}}" alt="">
+        <img src="{{asset('images' . '/' . $channel->image)}}" alt="">
     @endif
 
     <form wire:submit.prevent="update">
@@ -37,7 +37,7 @@
 
         @error('channel.description')
         <div class="alert alert-danger">
-            {{ $message }}
+            {{ $message }}b
         </div>
     @enderror
 

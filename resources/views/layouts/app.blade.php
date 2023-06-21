@@ -9,9 +9,21 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Alpinejs -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js"></script>
+
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
+
+
+    <!-- Material icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -52,6 +64,16 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item mx-4">
+                                <a href="{{route('video.create', [
+                                    'channel'=>Auth::user()->channel
+                                ])}}" class="nav-link">
+                                    <span class="material-icons">movie_filter</span>
+                                </a>
+
+                            </li>
+
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
