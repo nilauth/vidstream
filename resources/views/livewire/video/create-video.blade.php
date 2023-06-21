@@ -19,12 +19,12 @@
                             <div class="progress-bar" role="progressbar" :style="`width: ${progress}%`"></div>
                           </div>
 
-                          <form x-show="!isUploading">
+                          <form x-show="!isUploading" class="mb-4">
                               <input type="file" wire:model='videoFile'>
                           </form>
 
                           @error('videoFile')
-                              <div class="alert alert-danger"></div>
+                              <div class="alert alert-danger">{{$message}}</div>
                           @enderror
 
                     </div>

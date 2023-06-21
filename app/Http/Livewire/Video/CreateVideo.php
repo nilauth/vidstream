@@ -18,9 +18,15 @@ class CreateVideo extends Component
 
     public $videoFile;
 
+    protected $rules = [
+        'videoFile' => 'required|mimes:mp4|max:1228800',
+
+    ];
+
     public function mount(Channel $channel) {
 
         $this->channel = $channel;
+
     }
 
     public function render()
@@ -30,14 +36,37 @@ class CreateVideo extends Component
 
 
     public function fileCompleted() {
-        dd('working');
+
+        // validation
+        $this->validate();
+
+        // save the file
+
+        $path = $this->videoFile->store('videos-temp');
+
+        // create video record inside db
+        $this->video = $this->channel->videos()->create([
+            'title'=> 'untitled',
+
+            'description'=> 'none',
+
+            'uid'=> uniqid(true),
+
+            'visibility' => 'private',
+
+            'path' => explode('/', $path)[1],
+
+
+
+        ]);
+
+        // redirect to edit route
+
+        return redirect()->route('video.edit', [
+            'channel' => $this->channel,
+            'video' => $this->video,
+        ]);
+
     }
 
-
-    // public function upload() {
-    //     $this->validate([
-    //     'videoFile' => 'required|mimes:mp4|max:102400',
-
-    //     ]);
-    // }
 }
